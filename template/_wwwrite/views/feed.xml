@@ -1,0 +1,28 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title>
+	<![CDATA[ {{site.name}} ]]>
+	</title>
+	<link href="{{site.url}}/feed.xml" rel="self"/>
+	<link href="{{site.url}}"/>
+	<updated>{{site.date}}</updated>
+	<id>{{site.url}}</id>
+	<author>
+		<name>
+		<![CDATA[ {{site.author}} ]]>
+		</name>
+	</author>
+	<generator uri="http://github.com/vieron/wwwrite">wwwrite</generator>
+	{% for item in items %}
+	<entry>
+		<title type="html">
+		<![CDATA[ {{item.page.title}} ]]>
+		</title>
+		<link href="{{item.page.url}}"/>
+		<updated>{{item.page.isoDate}}</updated>
+		<id>{{item.page.url}}</id>
+		<content type="html">
+		<![CDATA[ {{item.content}} ]]>
+		</content>
+	</entry>
+	{% endfor %}
+</feed>

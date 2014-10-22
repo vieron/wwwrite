@@ -1,0 +1,16 @@
+{
+  "name": "<%= name %>",
+  "author": "<%= author %>",
+  "description": "<%= description %>",
+  "url": "<%= url %>",
+  "typekit": {
+  	<% if (typekit_id) { %>
+  	"id": "<%= typekit_id %>"
+  	<% } %>
+  },
+  "disqus": {
+  	<% if (disqus_shortname) { %>
+  	"shortname": "<%= disqus_shortname %>"
+  	<% } %>
+  }
+}

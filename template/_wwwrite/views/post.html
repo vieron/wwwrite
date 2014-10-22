@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="Post Post--complete">
+	<header class="Post-header">
+		{% if page.title %}<h1 class="Post-title">{{page.title}}</h1>{% endif %}
+		{% if page.date %}<date class="Post-date">{{page.date}}</date>{% endif %}
+	</header>
+	<div class="Post-body">
+		{{content}}
+	</div>
+
+	{% if site.disqus and page.comments %}
+	<div class="Post-comments">
+		{% include "partials/disqus.html" %}	
+	</div>
+	{% endif %}
+</div>
+{% endblock %}

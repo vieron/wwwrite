@@ -1,0 +1,23 @@
+$default-font-size: 21;
+
+* {
+    -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+  -moz-text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
+}
+
+
+body {
+    font-size: #{$default-font-size}px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 1em;
+}
+
+.u-ttl { text-align: left; }
+.u-ttr { text-align: right; }
+.u-ttc { text-align: center; }

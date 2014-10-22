@@ -1,0 +1,32 @@
+{
+  "name": "wwwrite",
+  "version": "0.0.1",
+  "description": "A tool for writing for the web",
+  "main": "./wwwrite.js",
+  "bin": "./cli.js",
+  "scripts": {
+    "test": ""
+  },
+  "keywords": [
+    "writing"
+  ],
+  "author": "vieron",
+  "license": "MIT",
+  "dependencies": {
+    "JQDeferred": "^2.1.0",
+    "commander": "^2.4.0",
+    "findit": "^2.0.0",
+    "fs-extra": "^0.12.0",
+    "highlight.js": "^8.3.0",
+    "inquirer": "^0.8.0",
+    "istextorbinary": "^1.0.0",
+    "lodash": "^2.4.1",
+    "marked": "^0.3.2",
+    "moment": "^2.8.3",
+    "node-sass": "^1.0.1",
+    "nunjucks": "^1.1.0",
+    "rsyncwrapper": "^0.4.1",
+    "slug": "^0.8.0",
+    "yfm": "^0.2.0"
+  }
+}
