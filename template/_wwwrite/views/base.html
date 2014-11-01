@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{{page.title}} · {{site.name}}</title>
-	<meta charset="utf-8">
-
-	{% if site.typekit %}
-    <script src="http://use.typekit.net/{{site.typekit.id}}.js"></script>
-	<script>try{Typekit.load();}catch(e){}</script>
-	{% endif %}
-
-	{% block css %}
-		<link rel="stylesheet" type="text/css" href="{{path.relAssets}}stylesheets/all.css">
-	{% endblock %}
-	{% include "partials/page_css.html" %}
+	{% include "partials/head.html" %}
 </head>
 <body class="Site">
 	<header class="Site-header">
@@ -30,13 +19,6 @@
 	{% endblock %}
 	</section>
 
-	<footer class="Site-footer">
-		<span class="Logo">{{site.name}}</span>
-	</footer>
-
-	{% block js %}
-		<script type="text/javascript" src="{{path.relAssets}}js/all.js"></script>
-	{% endblock %}
-	{% include "partials/page_js.html" %}
+	{% include "partials/footer.html" %}
 </body>
 </html>
