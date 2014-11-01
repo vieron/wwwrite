@@ -127,5 +127,5 @@ Deploy the site.
 - tests
 - seo_url in yml frontmatter overwrite default filename
 - multiple targets for css and js files in theme
-- link to page
+- improve link_to extension (pass relative paths, link to directories)
 - breadcrumbs

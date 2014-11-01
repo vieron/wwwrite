@@ -8,6 +8,11 @@ var yfm = require('yfm');
 var fileType = require('istextorbinary');
 var moment = require('moment');
 
+// nunjucks extensions
+var nunjucks_extensions = {
+	link_to: require('./extensions/link_to')
+}
+
 
 var u = {
 	ensureRelativePath: function(relativePath) {
@@ -120,6 +125,12 @@ _.extend(WWWrite.prototype, {
 		this.nunjucks = nunjucks.configure(path.join(this.viewsPath));
 	},
 
+	registerExtensions: function(env) {
+		_.each(nunjucks_extensions, function(extension) {
+			extension.register(env, this);
+		}, this);
+	},
+
 	isValidPath: function(path) {
 		return ! _.contains(this.opts.excludePaths, path);
 	},
@@ -217,6 +228,7 @@ _.extend(WWWrite.prototype, {
 		var destFilePath = path.join(this.buildPath, pageRelDirPath, destBasename);
 
 		var relRoot = u.ensureRelativePath(path.relative(path.dirname(destFilePath), this.buildPath));
+		var rootDestPath = path.join(pageRelDirPath, destBasename);
 
 		// file data (passed to template)
 		var data = _.merge({}, transformerDefaults, {
@@ -229,6 +241,7 @@ _.extend(WWWrite.prototype, {
 				basename: pageBasename,
 				basenameNoExt: pageBasenameNoExt,
 				destBasename: destBasename,
+				rootDest: rootDestPath,
 				relAssets: u.ensureRelativePath(
 					path.relative(path.dirname(destFilePath), this.builtThemeAssetsPath)),
 				relRoot: relRoot
@@ -237,7 +250,7 @@ _.extend(WWWrite.prototype, {
 				listing: true,
 				isPartial: path.basename(filePath)[0] === '_',
 				comments: true,
-				url: path.join(this.siteData.url, pageRelDirPath, destBasename)
+				url: path.join(this.siteData.url, rootDestPath)
 			},
 			isInRoot: relRoot === '',
 			transformer: transformer,
@@ -300,6 +313,7 @@ _.extend(WWWrite.prototype, {
 
 	build: function() {
 		this.clean();
+		this.registerExtensions(this.nunjucks);
 		_.each(this.fileTree, this.outputFile, this);
 		this.buildFeed();
 		this.buildTheme();
@@ -376,6 +390,7 @@ _.extend(WWWrite.prototype, {
 		var env = new nunjucks.Environment([
 			new nunjucks.FileSystemLoader(fileData.path.dirname),
             new nunjucks.FileSystemLoader(path.join(this.viewsPath))]);
+		this.registerExtensions(env);
 		var tmpl = nunjucks.compile(fileData.content, env, fileData.path.origin);
 
 		var fileRendered = tmpl.render(fileData);
