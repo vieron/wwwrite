@@ -1,0 +1,12 @@
+<title>{{page.title}} · {{site.name}}</title>
+<meta charset="utf-8">
+
+{% if site.typekit %}
+<script src="http://use.typekit.net/{{site.typekit.id}}.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+{% endif %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{{path.relAssets}}stylesheets/all.css">
+{% endblock %}
+{% include "partials/page_css.html" %}

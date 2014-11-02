@@ -5,7 +5,7 @@
   "main": "./wwwrite.js",
   "bin": "./cli.js",
   "scripts": {
-    "test": ""
+    "test": "./node_modules/mocha/bin/mocha --ui tdd --reporter spec"
   },
   "keywords": [
     "writing"
@@ -28,5 +28,9 @@
     "rsyncwrapper": "^0.4.1",
     "slug": "^0.8.0",
     "yfm": "^0.2.0"
+  },
+  "devDependencies": {
+    "chai": "^1.9.2",
+    "mocha": "^2.0.1"
   }
 }

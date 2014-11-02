@@ -115,8 +115,9 @@ _.extend(WWWrite.prototype, {
 		this.buildPath = path.join(this.opts.buildPath);
 		this.builtThemePath = path.join(this.opts.buildPath, '_wwwrite/');
 		this.builtThemeAssetsPath = path.join(this.builtThemePath, 'assets/');
-		this.siteData = (fs.existsSync('wwwrite.json') &&
-			JSON.parse(fs.readFileSync('wwwrite.json'))) || {};
+		var configPath = path.join(this.writingsPath, 'wwwrite.json');
+		this.siteData = (fs.existsSync(configPath) &&
+			JSON.parse(fs.readFileSync(configPath))) || {};
 
 		this.setup();
 	},

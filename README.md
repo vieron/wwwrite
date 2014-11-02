@@ -1,5 +1,7 @@
 # wwwrite
 
+[![Build Status](https://api.travis-ci.org/vieron/wwwrite.svg)](https://travis-ci.org/vieron/wwwrite)
+
 A simple node library to generate kind of blog/wiki from file-system documents.
 
 The main goal of **wwwrite** is to make writing documents easier, specially for developers writing techy articles with code examples and external resources.
@@ -136,7 +138,7 @@ Deploy the site.
 ### TODO
 
 - asyncify (use Deferreds)
-- tests
+- add more and more tests
 - seo_url in yml frontmatter overwrite default filename
 - multiple targets for css and js files in theme
 - improve link_to extension (pass relative paths)
