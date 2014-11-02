@@ -75,6 +75,7 @@ In the default theme, the following templates are included:
 Actually there are more templates (feed.xml, base.html) used for composing, but they should not be used directly from the YAML front matter.
 
 
+
 ### Extensions
 
 Some extensions you can use in templates and views:
@@ -82,8 +83,6 @@ Some extensions you can use in templates and views:
 #### link_to
 
 `{% link_to "labs" %}` or `{% link_to "labs/index.html" %}`
-
-
 
 
 
@@ -127,6 +126,9 @@ Create a new site using wwwrite. It creates a new folder with the name supplied.
 
 ##### `$ wwwrite new`
 Create a new page and fill some metadata.
+
+##### `$ wwwrite edit <article.md>`
+Open a file with your favorite editor.
 
 ##### `$ wwwrite build`
 Build the site.

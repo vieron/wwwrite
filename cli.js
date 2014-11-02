@@ -10,6 +10,7 @@ var moment = require('moment');
 var _slug = require('slug');
 var fs = require('fs-extra');
 var path = require('path');
+var exec = require('child_process').exec;
 var WWWrite = require('./wwwrite');
 
 
@@ -83,6 +84,15 @@ program
 			fs.copySync(path.join(templatePath, '_wwwrite'), path.join(sitePath, '_wwwrite/'));
 		});
 	});
+
+program
+	.command('edit <file>')
+	.description('Edit a file')
+	.action(function(file) {
+		exec('open ' + file, function (error, stdout, stderr) {
+		  	if (error) console.log(error, stdout, stderr);
+		});
+	})
 
 program
    .command('new')
