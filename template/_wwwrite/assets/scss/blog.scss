@@ -107,7 +107,8 @@ $post-padding: 3.75em;
         color: #FFF;
         @include transition(0.3s background-color);
 
-        &:hover {
+        &:hover,
+        &.is-active {
             background-color: rgba(#FFF, 0.2);
         }
     }
@@ -143,6 +144,7 @@ $post-padding: 3.75em;
     }
 
     span {
+        display: inline-block;
         vertical-align: top;
         line-height: 1em;
     }

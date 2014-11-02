@@ -21,7 +21,15 @@ function LinkToExtension(wwwrite) {
             return item.path.rootDest === filePath;
         });
 
-        return '<a href="' + path.join(context.path.relRoot, item.path.rootDest) + '">' + item.page.title + '</a>';
+        var targetDirPath = item.path.dirname + '/';
+        var currentDirPath = context.path.dirname + '/';
+        var isActive = currentDirPath.match(new RegExp('^' + targetDirPath), 'g');
+
+        return '<a href="' +
+                    path.join(context.path.relRoot, item.path.rootDest) +
+                '" ' + (isActive ? 'class="is-active"' : '') + '>' +
+                    item.page.title +
+                '</a>';
     };
 }
 
