@@ -73,6 +73,18 @@ In the default theme, the following templates are included:
 Actually there are more templates (feed.xml, base.html) used for composing, but they should not be used directly from the YAML front matter.
 
 
+### Extensions
+
+Some extensions you can use in templates and views:
+
+#### link_to
+
+`{% link_to "labs" %}` or `{% link_to "labs/index.html" %}`
+
+
+
+
+
 ## Installation
 
     $ npm install -g wwwrite
@@ -127,5 +139,5 @@ Deploy the site.
 - tests
 - seo_url in yml frontmatter overwrite default filename
 - multiple targets for css and js files in theme
-- improve link_to extension (pass relative paths, link to directories)
+- improve link_to extension (pass relative paths)
 - breadcrumbs

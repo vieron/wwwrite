@@ -5,6 +5,11 @@
 var _ = require('lodash');
 var path = require('path');
 
+// Usage:
+//
+// {% link_to "labs/index.html" %}
+// {% link_to "labs" %}
+
 function LinkToExtension(wwwrite) {
     this.tags = ['link_to'];
 
@@ -21,6 +26,12 @@ function LinkToExtension(wwwrite) {
             return item.path.rootDest === filePath;
         });
 
+        if (!item) {
+            item = _(wwwrite.dirTree).find(function(item) {
+                return item.path.dirname === filePath;
+            });
+        }
+
         var targetDirPath = item.path.dirname + '/';
         var currentDirPath = context.path.dirname + '/';
         var isActive = currentDirPath.match(new RegExp('^' + targetDirPath), 'g');
@@ -30,9 +41,8 @@ function LinkToExtension(wwwrite) {
                 '" ' + (isActive ? 'class="is-active"' : '') + '>' +
                     item.page.title +
                 '</a>';
-    };
+    }
 }
-
 
 module.exports.register = function(env, wwwrite) {
     env.addExtension('linkto', new LinkToExtension(wwwrite));
