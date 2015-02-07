@@ -376,15 +376,12 @@ _.extend(WWWrite.prototype, {
 
 	sortTree: function(tree) {
 		return tree.sort(function(a, b) {
-			if (b.page.sticky && b.page.sticky < a.page.sticky) {
+			if (a.page.momentDate < b.page.momentDate) {
 				return 1;
+			} else {
+				return -1;
 			}
-
-			if (b.page.momentDate > a.page.momentDate) {
-				return 1;
-			}
-
-			return -1;
+			return 0;
 		});
 	},
 
