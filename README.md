@@ -137,8 +137,12 @@ Build the site.
 Deploy the site.
 
 
-### TODO
 
+### TODO
+- compress and gzip
+- snippet extension (like codepen embed)
+  // {% snippet "snippet.html" %}  snippet: true, js: wadus.js, css: wadus.css
+  // {% snippet "snippet.html" %}
 - asyncify (use Deferreds)
 - add more and more tests
 - seo_url in yml frontmatter overwrite default filename
