@@ -180,8 +180,9 @@ _.extend(WWWrite.prototype, {
 		var d = Deferred();
 
 		this.parse().done(function() {
-			this.build();
-			d.resolve(this);
+			this.build().done(function() {
+				d.resolve(this);
+			});
 		}.bind(this));
 
 		return d.promise();
@@ -313,12 +314,17 @@ _.extend(WWWrite.prototype, {
 	},
 
 	build: function() {
+		var d = Deferred();
+
 		this.clean();
 		this.registerExtensions(this.nunjucks);
 		_.each(this.fileTree, this.outputFile, this);
 		this.buildFeed();
-		this.buildTheme();
-		return this;
+		this.buildTheme().always(function() {
+			d.resolve();
+		});
+
+		return d.promise();
 	},
 
 	getFileSiblings: function(currentFileData, selfInclude) {
@@ -407,6 +413,8 @@ _.extend(WWWrite.prototype, {
 	},
 
 	buildTheme: function() {
+		var d = Deferred();
+
 		fs.copySync(this.opts.themePath, this.builtThemePath);
 
 		fs.removeSync(path.join(this.builtThemePath, 'views'));
@@ -416,11 +424,15 @@ _.extend(WWWrite.prototype, {
 			outFile: path.join(this.builtThemeAssetsPath, 'stylesheets/all.css'),
 			success: function() {
 				fs.removeSync(path.join(this.builtThemeAssetsPath, 'scss'));
+				d.resolve();
 			}.bind(this),
 			error: function(error) {
 		        console.log('Error compiling .scss files of the theme', error);
+		        d.reject();
 		    }.bind(this)
 		});
+
+		return d.promise();
 	},
 
 	buildFeed: function() {

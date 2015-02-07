@@ -134,7 +134,13 @@ program
 program
 	.command('build')
 	.description('Build the site')
-	.action(build);
+	.action(function() {
+		build().done(function() {
+			process.exit(0);
+		}).fail(function() {
+			process.exit(1);
+		});
+	});
 
 program
 	.command('deploy')
@@ -159,10 +165,12 @@ program
 			rsync(deploy_config, function(error, stdout, stderr, cmd) {
 				if (error) {
 					console.log(error.message);
+					process.exit(1);
 					return;
 				}
 				stdout && console.log(stdout);
 				console.log('Site Deployed!');
+				process.exit(0);
 			})
 		});
 	});
