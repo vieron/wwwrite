@@ -3,16 +3,16 @@
 {% block content %}
 <div class="Post Post--complete">
 	<header class="Post-header">
-		{% if page.title %}<h1 class="Post-title">{{page.title}}</h1>{% endif %}
-		{% if page.date %}<date class="Post-date">{{page.date}}</date>{% endif %}
+		{% if metadata.title %}<h1 class="Post-title">{{metadata.title}}</h1>{% endif %}
+		{% if metadata.date %}<date class="Post-date">{{metadata.date.human}}</date>{% endif %}
 	</header>
 	<div class="Post-body">
-		{{content}}
+		{{outContent}}
 	</div>
 
-	{% if site.disqus and page.comments %}
+	{% if site.disqus and metadata.comments %}
 	<div class="Post-comments">
-		{% include "partials/disqus.html" %}	
+		{% include "partials/disqus.html" %}
 	</div>
 	{% endif %}
 </div>

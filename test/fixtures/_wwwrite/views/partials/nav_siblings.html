@@ -1,8 +1,8 @@
 <ol>
-{% for file in fs.siblings %}
-	<li class="Post Post--intro {% if file.dir %}Post--dir{% endif %} {% if file.page.sticky %}Post--sticky{% endif %}">
-		<h2 class="Post-title"><a href="{% if file.dir %}{{file.dir.destBasename}}{% else %}{{file.path.destBasename}}{% endif %}">{{ file.page.title }}</a></h2>
-		{% if file.page.date %}<date class="Post-date">{{file.page.date}}</date>{% endif %}
-	</li>
+{% for item in path|sibling_pages %}
+  <li class="Post Post--intro {% if item.isDir %}Post--dir{% endif %} {% if item.metadata.sticky %}Post--sticky{% endif %}">
+    <h2 class="Post-title"><a href="{% url_to item %}">{{ item.metadata.title }}</a></h2>
+    {% if item.metadata.date %}<date class="Post-date">{{item.metadata.date.human}}</date>{% endif %}
+  </li>
 {% endfor %}
 </ol>

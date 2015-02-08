@@ -2,6 +2,7 @@ var chai = require('chai');
 chai.config.includeStack = true;
 var should = chai.should();
 
+var Deferred = require('JQDeferred');
 var _ = require('lodash');
 var fs = require('fs-extra');
 
@@ -10,41 +11,39 @@ var WWWrite = require('./../wwwrite');
 
 var tree = [
     // 'file-as-page/',
-    'file-as-page/index.md',
-    'file-as-page/homercat.png',
+    'articles/file-as-page/index.md',
+    'articles/file-as-page/homercat.png',
     // 'file-as-page-excluded-from-listing/',
-    'file-as-page-excluded-from-listing/child-1.md',
-    'file-as-page-excluded-from-listing/index.md',
+    'articles/file-as-page-excluded-from-listing/child-1.md',
+    'articles/file-as-page-excluded-from-listing/index.md',
     // 'labs/',
-    'labs/labs-1.md',
+    'articles/labs/labs-1.md',
     // 'nested/',
-    'nested/index.md',
-    'nested/example-1.md',
-    'nested/example-2.md',
-    'nested/style.scss',
-    'nested/assets/demo.js',
+    'articles/nested/index.md',
+    'articles/nested/example-1.md',
+    'articles/nested/example-2.md',
+    'articles/nested/style.scss',
+    'articles/nested/assets/demo.js',
     // 'nested/nested/',
-    'nested/nested/index.md',
-    'nested/nested/example-1.md',
-    'nested/nested/example-2.md',
-    'nested/nested/style.scss',
-    'nested/nested/assets/demo.js',
-    'article-1.md',
-    'article-2.md',
-    'sticky.md',
+    'articles/nested/nested/index.md',
+    'articles/nested/nested/example-1.md',
+    'articles/nested/nested/example-2.md',
+    'articles/nested/nested/style.scss',
+    'articles/nested/nested/assets/demo.js',
+    'articles/article-1.md',
+    'articles/article-2.md',
+    'articles/sticky.md',
+    'articles/index.md',
     'index.md'
 ];
 
-_.each(tree, function(item, i) {
-    tree[i] = 'test/fixtures/' + item;
-});
-
 
 describe('wwwrite', function() {
+
     before(function() {
         this.wwwrite = new WWWrite({
-            writingsPath: 'test/fixtures/',
-            buildPath: 'test/fixtures/_build/',
+            srcPath: 'test/fixtures/',
+            outPath: 'test/fixtures/_build/',
             themePath: 'test/fixtures/_wwwrite/' // not user changeable (at the moment)
         });
     });
@@ -64,37 +63,61 @@ describe('wwwrite', function() {
             });
         });
 
-        it('should define and set fileTree and dirTree attributes', function() {
-            this.wwwrite.fileTree.should.exist;
-            this.wwwrite.fileTree.should.have.length.above(0);
-            this.wwwrite.dirTree.should.exist;
-            this.wwwrite.dirTree.should.have.length.above(0);
+        it('should define and set fileTree and dirTree attributes', function(done) {
+            this.wwwrite.db.should.exist;
+            this.wwwrite.db.find({isFile: true}, function(err, res) {
+                res.should.have.length.above(0);
+                this.wwwrite.db.find({isDir: true}, function(err, res) {
+                    res.should.have.length.above(0);
+                    done();
+                }.bind(this));
+            }.bind(this));
         });
 
-        it('should exists data for each file', function() {
-            _.each(tree, function(filePath) {
-                var files = this.wwwrite.fileTree.filter(function(item) {
-                    return item.path.origin === filePath;
-                });
-                files.should.have.length(1);
+        it('should exists data for each file', function(done) {
+            var promises = _.map(tree, function(filePath) {
+                var d = Deferred();
+
+                this.wwwrite.db.find({isFile: true, 'path.rootSrcPath': filePath}, function(err, res) {
+                    if (err) { return d.reject(); }
+                    res.should.have.length(1);
+                    d.resolve();
+                }.bind(this));
+
+                return d.promise();
             }, this);
+
+            Deferred.when.apply(null, promises).done(function() {
+                done();
+            });
         });
 
         describe('#YAML front matter', function() {});
     });
 
     describe('#build', function() {
-        before(function() {
-            this.wwwrite.build();
+        before(function(done) {
+            this.wwwrite.build().done(function() {
+                done();
+            });
         });
 
-        it('should write ouput files', function() {
-            _.each(tree, function(filePath) {
-                var file = _.find(this.wwwrite.fileTree, function(item) {
-                    return item.path.origin === filePath;
-                });
-                fs.existsSync(file.path.dest).should.be.true;
+        it('should write ouput files', function(done) {
+            var promises = _.map(tree, function(filePath) {
+                var d = Deferred();
+
+                this.wwwrite.db.findOne({isFile: true, 'path.rootSrcPath': filePath}, function(err, res) {
+                    if (err) { return d.reject(); }
+                    fs.existsSync(res.path.outFilePath).should.be.true;
+                    d.resolve();
+                }.bind(this));
+
+                return d.promise();
             }, this);
+
+            Deferred.when.apply(null, promises).done(function() {
+                done();
+            });
         });
     });
 });

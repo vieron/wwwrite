@@ -6,16 +6,19 @@
 <body class="Site">
     <header class="Site-header">
         <div class="u-wrapper">
-            <h1 class="Logo">
-                <a href="{{path.relRoot}}index.html">{{site.name}}</a><br/>
+            <div class="Logo">
+                <a href="{% url_to 'index.md' %}">{{site.name}}</a><br/>
                 <span>{{site.description}}</span>
-            </h1>
+            </div>
+            <nav>
+                {% link_to 'articles/index.md' %}
+            </nav>
         </div>
     </header>
 
     <section>
     {% block content %}
-        {{content}}
+        {{outContent}}
     {% endblock %}
     </section>
 

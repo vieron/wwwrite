@@ -1,5 +1,17 @@
 $default-font-size: 21;
 
+$ms-base: 18px;
+$ms-ratio: $major-third;
+
+
+$ms-norm   : ms(1);
+$ms-m      : ms(2);
+$ms-l      : ms(3);
+$ms-xl     : ms(4);
+$ms-xxl    : ms(5);
+$ms-xxxl   : ms(6);
+
+
 * {
     -webkit-font-smoothing: antialiased;
 }
@@ -9,13 +21,56 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-
 body {
-    font-size: #{$default-font-size}px;
+    font-size: $ms-norm;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-size: 1em;
+
+h1 {
+    font-size: ms(6);
+    line-height: ms(1, ms(6));
+    margin-top: ms(3, ms(6));
+    margin-bottom: ms(0, ms(6));
+}
+
+h2 {
+    font-size: ms(5);
+    line-height: ms(1, ms(5));
+    margin-top: ms(3, ms(5));
+    margin-bottom: ms(0, ms(5));
+}
+
+h3 {
+    font-size: ms(4);
+    line-height: ms(1, ms(4));
+    margin-top: ms(3, ms(4));
+    margin-bottom: ms(0, ms(4));
+}
+
+h4 {
+    font-size: ms(3);
+    line-height: ms(1, ms(3));
+    margin-top: ms(3, ms(3));
+    margin-bottom: ms(0, ms(3));
+}
+
+h5 {
+    font-size: ms(2);
+    line-height: ms(1, ms(2));
+    margin-top: ms(3, ms(2));
+    margin-bottom: ms(0, ms(2));
+}
+
+h6 {
+    font-size: ms(1);
+    line-height: ms(1, ms(1));
+    margin-top: ms(3, ms(1));
+    margin-bottom: ms(0, ms(1));
+}
+
+h1, h2, h3, h4 {
+    // margin-top: ms(6);
+    // margin-bottom: ms(2);
 }
 
 .u-ttl { text-align: left; }
