@@ -23,6 +23,7 @@
     "lodash": "^2.4.1",
     "marked": "^0.3.2",
     "moment": "^2.8.3",
+    "nedb": "^1.1.1",
     "node-sass": "^1.0.1",
     "nunjucks": "^1.1.0",
     "rsyncwrapper": "^0.4.1",

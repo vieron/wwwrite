@@ -156,7 +156,7 @@ program
 				recursive: true,
 				ssh: true,
 				deleteAll: true,
-				src: wwwrite.opts.buildPath,
+				src: wwwrite.opts.outPath,
 				exclude: [".DS_Store", ".gitignore"]
 			}, wwwrite.siteData.deploy);
 
