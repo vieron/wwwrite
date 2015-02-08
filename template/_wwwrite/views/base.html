@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-	{% include "partials/head.html" %}
+    {% include "partials/head.html" %}
 </head>
 <body class="Site">
-	<header class="Site-header">
-		<div class="u-wrapper">
-			<h1 class="Logo">
-				<a href="{{path.relRoot}}index.html">{{site.name}}</a><br/>
-				<span>{{site.description}}</span>
-			</h1>
-		</div>
-	</header>
+    <header class="Site-header">
+        <div class="u-wrapper">
+            <div class="Logo">
+                <a href="{% url_to 'index.md' %}">{{site.name}}</a><br/>
+                <span>{{site.description}}</span>
+            </div>
+            <nav>
+                {% link_to 'articles/index.md' %}
+            </nav>
+        </div>
+    </header>
 
-	<section>
-	{% block content %}
-		{{content}}
-	{% endblock %}
-	</section>
+    <section>
+    {% block content %}
+        {{outContent}}
+    {% endblock %}
+    </section>
 
-	{% include "partials/footer.html" %}
+    {% include "partials/footer.html" %}
 </body>
 </html>

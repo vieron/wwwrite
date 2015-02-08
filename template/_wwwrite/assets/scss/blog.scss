@@ -60,10 +60,10 @@ $font-monospace-bold-weight: 700;
 
 
 
-$post-padding: 3.75em;
+$post-padding: ms(7);
 
 .u-wrapper {
-    max-width: 972px;
+    max-width: ms(17);
 }
 
 .hljs, code {
@@ -92,6 +92,7 @@ $post-padding: 3.75em;
     }
 
     nav {
+        padding-top: ms(0);
         float: right;
     }
 
@@ -99,7 +100,7 @@ $post-padding: 3.75em;
         @extend .font-proximanova-extrabold;
         display: inline-block;
         border-radius: 2px;
-        font-size: 0.75em;
+        font-size: ms(0);
         text-transform: uppercase;
         padding: 0.5em 1em;
         background-color: transparent;
@@ -127,35 +128,31 @@ $post-padding: 3.75em;
 
 
 .Logo {
-    font-size: 30px;
-    line-height: 1em;
+    font-size: ms(4);
+    // line-height: 1em;
     margin: 0;
     @extend .font-proximanova-extrabold;
 
     span {
-        font-size: 14px;
+        font-size: ms(-5, ms(4));
         @extend .font-monospaced;
     }
 
     a {
         text-decoration: none;
         display: inline-block;
-        padding-bottom: 5px;
     }
 
     span {
         display: inline-block;
         vertical-align: top;
-        line-height: 1em;
     }
 }
 
 
 .Post {}
 
-.Post--complete {
-    padding-top: $post-padding;
-}
+.Post--complete {}
 
 .Post--sticky {
     position: relative;
@@ -177,11 +174,7 @@ $post-padding: 3.75em;
     @extend .font-metaserif-bold;
     max-width: 700px;
     color: #454545;
-    font-size: 39px;
-    margin-bottom: 29px;
-    margin-top: 39px;
     position: relative;
-    line-height: 1.2em;
 
     a {
         color: inherit;
@@ -191,15 +184,15 @@ $post-padding: 3.75em;
 
 .Post-date {
     @extend .font-monospaced;
-    font-size: 0.6em;
-    margin-top: - ($post-padding / 2);
+    font-size: ms(-1);
+    margin-top: - ms(6, ms(-1));
     display: block;
     margin-bottom: $post-padding;
 }
 
 .Post-body {
-    padding-left: $post-padding;
-    padding-bottom: $post-padding;
+    padding-left: ms(7);
+    padding-bottom: ms(7);
     @extend .u-wrapper;
 
     a {
@@ -212,16 +205,15 @@ $post-padding: 3.75em;
     }
 
     p, ul, ol, dl, pre, .gist {
-        margin-bottom: 30px;
-        line-height: 30px;
+        margin-bottom: ms(3);
     }
 
     ol {
-        margin-left: 1.2em;
+        margin-left: ms(1);
     }
 
     li {
-        margin-bottom: 0.5em;
+        padding-bottom: ms(0);
     }
 
     ul li {
@@ -230,7 +222,7 @@ $post-padding: 3.75em;
     }
 
     h1, h2, h3, h4, h5, h6 {
-        margin-bottom: 1em;
+        // margin-bottom: ms(0);
     }
 
     blockquote {
@@ -250,8 +242,8 @@ $post-padding: 3.75em;
 
         code {
             display: block;
-            font-size: 18px;
-            line-height: 1.3;
+            // font-size: 18px;
+            // line-height: 1.3;
             padding: $post-padding;
         }
     }
